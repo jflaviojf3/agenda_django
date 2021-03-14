@@ -1,0 +1,35 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+<th>
+<td>
+    <a href="/agenda/">
+        <button>Home</button>
+    </a>
+</td>
+</th>
+<th>
+<td>
+    <a href="/agenda/evento">
+        <button>Novo Evento</button>
+    </a>
+</td>
+</th>
+<h2>Agentamento PSCS</h2>
+
+
+<ul>
+    {% for evento in eventos %}
+        <div    {% if evento.get_evento_atrasado %}
+                style="color:red"
+                {% endif %}
+        >
+            <li><b>{{ evento.titulo}} - {{ evento.get_data_evento}} - (
+                <a href="/agenda/evento/?id={{ evento.id}}">Editar</a> |
+                <a href="/agenda/evento/delete/{{ evento.id }}">Excluir</a> )</b>
+            <br>
+        </div>
+    <p>{{evento.descricao}} | [ {{ evento.get_local_evento}} ]</p></li>
+    {% endfor %}
+</ul>
+{% endblock %}
